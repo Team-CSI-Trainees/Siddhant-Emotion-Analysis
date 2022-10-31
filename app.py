@@ -56,13 +56,6 @@ def gen_frames():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-        ##if cv.waitKey(1) & 0xFF == ord('q'):
-        ##   break
-
-# Release handle to the webcam
-##capture.release()
-##cv.destroyAllWindows()
-
 
 @app.route('/')
 def index():
