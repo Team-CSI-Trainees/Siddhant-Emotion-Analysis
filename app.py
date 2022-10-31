@@ -31,7 +31,7 @@ def gen_frames():
                 #emotion#
                 cv.putText(frame,
                            result['dominant_emotion'],
-                           (x+25, y+25),
+                           (x, y+50),
                            font, 1,
                            (0, 255, 0), 2,
                            cv.LINE_8)
@@ -47,7 +47,7 @@ def gen_frames():
                 #gender#
                 cv.putText(frame,
                            result['gender'],
-                           (x-25, y-25),
+                           (x, y+25),
                            font, 1,
                            (0, 255, 0), 2,
                            cv.LINE_8)
@@ -56,6 +56,7 @@ def gen_frames():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 
 @app.route('/')
 def index():

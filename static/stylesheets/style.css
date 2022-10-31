@@ -1,0 +1,16 @@
+* {
+    background-image: url("/static/images/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.video {
+    display: flex;
+    margin-left: 20%;
+    margin-top: 5%;
+}
