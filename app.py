@@ -5,8 +5,9 @@ from flask import Flask, render_template, Response
 
 app = Flask(__name__)
 
-capture = cv.VideoCapture(0)
+#print (__name__)
 
+capture = cv.VideoCapture(0)
 
 def gen_frames():
     while True:
@@ -15,7 +16,7 @@ def gen_frames():
             break
         else:
             result = DeepFace.analyze(
-                frame, actions=["age", "gender", "emotion", "race"])
+                frame, actions=["age", "gender", "emotion", "race"], enforce_detection=False)
             print(result)
             detector = MTCNN()
             faces = detector.detect_faces(frame)  # result
@@ -31,7 +32,7 @@ def gen_frames():
                 #emotion#
                 cv.putText(frame,
                            result['dominant_emotion'],
-                           (x, y+50),
+                           (x, y-50),
                            font, 1,
                            (0, 255, 0), 2,
                            cv.LINE_8)
@@ -47,7 +48,7 @@ def gen_frames():
                 #gender#
                 cv.putText(frame,
                            result['gender'],
-                           (x, y+25),
+                           (x, y-25),
                            font, 1,
                            (0, 255, 0), 2,
                            cv.LINE_8)
@@ -67,6 +68,9 @@ def index():
 def video():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+#@app.route('/exit')
+#def exit():
+#    return render_template('exit.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)    
